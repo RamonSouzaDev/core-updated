@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Novosga\Service;
 
+use Exception;
 use Novosga\Entity\AgendamentoInterface;
 use Novosga\Entity\AtendimentoInterface;
 use Novosga\Entity\ClienteInterface;
@@ -34,17 +35,17 @@ interface AtendimentoServiceInterface
     public const ATTR_NAMESPACE = 'global';
 
     // estados do atendimento
-    const SENHA_EMITIDA         = 'emitida';
-    const CHAMADO_PELA_MESA     = 'chamado';
-    const ATENDIMENTO_INICIADO  = 'iniciado';
-    const ATENDIMENTO_ENCERRADO = 'encerrado';
-    const NAO_COMPARECEU        = 'nao_compareceu';
-    const SENHA_CANCELADA       = 'cancelada';
-    const ERRO_TRIAGEM          = 'erro_triagem';
+    public const SENHA_EMITIDA = 'emitida';
+    public const CHAMADO_PELA_MESA = 'chamado';
+    public const ATENDIMENTO_INICIADO = 'iniciado';
+    public const ATENDIMENTO_ENCERRADO = 'encerrado';
+    public const NAO_COMPARECEU = 'nao_compareceu';
+    public const SENHA_CANCELADA = 'cancelada';
+    public const ERRO_TRIAGEM = 'erro_triagem';
 
     // resolucoes
-    const RESOLVIDO  = 'resolvido';
-    const PENDENTE   = 'pendente';
+    public const RESOLVIDO = 'resolvido';
+    public const PENDENTE = 'pendente';
 
     public function getById(int $id): ?AtendimentoInterface;
 
@@ -58,8 +59,13 @@ interface AtendimentoServiceInterface
 
     /**
      * Cria ou retorna um metadado do atendimento caso o $value seja null (ou ocultado).
+     * @return ?EntityMetadataInterface<UnidadeInterface>
      */
-    public function meta(AtendimentoInterface $atendimento, string $name, mixed $value = null): ?EntityMetadataInterface;
+    public function meta(
+        AtendimentoInterface $atendimento,
+        string $name,
+        mixed $value = null
+    ): ?EntityMetadataInterface;
 
     public function buscaAtendimento(UnidadeInterface $unidade, int $id): ?AtendimentoInterface;
 

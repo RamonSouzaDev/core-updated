@@ -29,6 +29,11 @@ interface StorageInterface
 {
     public function getManager(): EntityManagerInterface;
 
+    /**
+     * @template T of object
+     * @param class-string<T> $className
+     * @return EntityRepository<T>
+     */
     public function getRepository(string $className): EntityRepository;
 
     /** Gera uma nova senha de atendimento */
@@ -37,7 +42,11 @@ interface StorageInterface
     public function chamar(AtendimentoInterface $atendimento): void;
 
     /** @param AtendimentoCodificadoInterface[] $codificados */
-    public function encerrar(AtendimentoInterface $atendimento, array $codificados, AtendimentoInterface $novoAtendimento = null): void;
+    public function encerrar(
+        AtendimentoInterface $atendimento,
+        array $codificados,
+        AtendimentoInterface $novoAtendimento = null
+    ): void;
 
     /**
      * Move os dados de atendimento para o histórico

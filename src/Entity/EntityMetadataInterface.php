@@ -15,9 +15,9 @@ namespace Novosga\Entity;
 
 /**
  * EntityMetadataInterface.
- * 
+ *
  * @template T
- * 
+ *
  * @author Rogerio Lino <rogeriolino@gmail.com>
  */
 interface EntityMetadataInterface extends MetadataInterface

@@ -21,7 +21,7 @@ use Doctrine\Persistence\ObjectRepository;
 
 /**
  * ServicoUsuarioRepositoryInterface
- * 
+ *
  * @extends ObjectRepository<ServicoUsuarioInterface>
  *
  * @author Rogério Lino <rogeriolino@gmail.com>
@@ -33,7 +33,7 @@ interface ServicoUsuarioRepositoryInterface extends ObjectRepository, BaseReposi
      * @return ServicoUsuarioInterface[]
      */
     public function getAll(UsuarioInterface|int $usuario, UnidadeInterface|int $unidade): array;
-    
+
     /**
      * Retorna o relacionamento entre o serviço e a usuario.
      */

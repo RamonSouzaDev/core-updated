@@ -33,18 +33,18 @@ interface EntityMetadataRepositoryInterface extends ObjectRepository, BaseReposi
      */
     public function findByNamespace($entity, string $namespace): array;
 
-    /** 
+    /**
      * @param E $entity
      * @return ?T
      */
     public function get($entity, string $namespace, string $name);
-    
+
     /**
      * @param E $entity
      * @return T
      */
     public function set($entity, string $namespace, string $name, mixed $value = null);
-    
+
     /** @param E $entity */
     public function remove($entity, string $namespace, string $name): void;
 }

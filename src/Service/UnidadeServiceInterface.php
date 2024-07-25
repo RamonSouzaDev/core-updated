@@ -35,5 +35,9 @@ interface UnidadeServiceInterface
      */
     public function meta(UnidadeInterface $unidade, string $name, mixed $value = null): ?EntityMetadataInterface;
 
-    public function addServicoUnidade(ServicoInterface $servico, UnidadeInterface $unidade, string $sigla): ServicoUnidadeInterface;
+    public function addServicoUnidade(
+        ServicoInterface $servico,
+        UnidadeInterface $unidade,
+        string $sigla
+    ): ServicoUnidadeInterface;
 }

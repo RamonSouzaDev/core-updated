@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Novosga\Service;
 
-use App\Entity\ServicoUsuario;
 use Novosga\Entity\EntityMetadataInterface;
 use Novosga\Entity\ServicoInterface;
 use Novosga\Entity\ServicoUsuarioInterface;
@@ -55,24 +54,29 @@ interface UsuarioServiceInterface
      */
     public function getServicosUnidade(UsuarioInterface $usuario, UnidadeInterface $unidade): array;
 
-    public function updateAtendente(UsuarioInterface $usuario, ?string $tipoAtendimento, ?int $local, ?int $numero): void;
+    public function updateAtendente(
+        UsuarioInterface $usuario,
+        ?string $tipoAtendimento,
+        ?int $local,
+        ?int $numero,
+    ): void;
 
     public function addServicoUsuario(
         UsuarioInterface $usuario,
         ServicoInterface $servico,
         UnidadeInterface $unidade
-    ): ServicoUsuario;
+    ): ServicoUsuarioInterface;
 
     public function removeServicoUsuario(
         UsuarioInterface $usuario,
         ServicoInterface $servico,
         UnidadeInterface $unidade
-    ): ?ServicoUsuario;
+    ): ?ServicoUsuarioInterface;
 
     public function updateServicoUsuario(
         UsuarioInterface $usuario,
         ServicoInterface $servico,
         UnidadeInterface $unidade,
         int $peso,
-    ): ?ServicoUsuario;
+    ): ?ServicoUsuarioInterface;
 }

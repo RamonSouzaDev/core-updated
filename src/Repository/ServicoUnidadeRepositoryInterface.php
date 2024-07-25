@@ -32,7 +32,7 @@ interface ServicoUnidadeRepositoryInterface extends ObjectRepository, BaseReposi
      * @return ServicoUnidadeInterface[]
      */
     public function getAll(UnidadeInterface|int $unidade): array;
-    
+
     /**
      * Retorna o relacionamento entre o serviço e a unidade.
      */

@@ -26,7 +26,6 @@ use Novosga\Entity\UsuarioInterface;
  */
 interface UnidadeRepositoryInterface extends ObjectRepository, BaseRepository
 {
-    
     /**
      * Retorna as unidades disponíveis para o usuário
      * @return UnidadeInterface[]

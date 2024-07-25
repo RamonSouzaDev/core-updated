@@ -22,115 +22,97 @@ use Throwable;
  */
 class Envelope implements \JsonSerializable
 {
-    /**
-     * @var bool
-     */
-    private $success;
-    
-    /**
-     * @var string
-     */
-    private $sessionStatus;
-    
-    /**
-     * @var mixed
-     */
-    private $data;
-    
-    /**
-     * @var string
-     */
-    private $message;
-    
-    /**
-     * @var string
-     */
-    private $detail;
+    private bool $success = true;
+    private string $sessionStatus = 'active';
+    private ?string $message = null;
+    private ?string $detail = null;
 
-    public function __construct($data = null)
-    {
-        $this->data = $data;
-        $this->success = true;
-        $this->sessionStatus = 'active';
+    public function __construct(
+        private mixed $data = null
+    ) {
     }
-    
-    public function isSuccess()
+
+    public function isSuccess(): bool
     {
         return $this->success;
     }
 
-    public function getSessionStatus()
+    public function setSuccess(bool $success): static
+    {
+        $this->success = $success;
+
+        return $this;
+    }
+
+    public function getSessionStatus(): string
     {
         return $this->sessionStatus;
     }
 
-    public function getData()
+    public function setSessionStatus(string $session): static
+    {
+        $this->sessionStatus = $session;
+
+        return $this;
+    }
+
+    public function getData(): mixed
     {
         return $this->data;
     }
 
-    public function getMessage()
+    public function setData(mixed $data): static
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
-    public function setSuccess($success)
-    {
-        $this->success = $success;
-        return $this;
-    }
-
-    public function setSessionStatus($session)
-    {
-        $this->sessionStatus = $session;
-        return $this;
-    }
-
-    public function setData($data)
-    {
-        $this->data = $data;
-        return $this;
-    }
-
-    public function setMessage($message)
+    public function setMessage(?string $message): static
     {
         $this->message = $message;
+
         return $this;
     }
-    
-    public function getDetail()
+
+    public function getDetail(): ?string
     {
         return $this->detail;
     }
 
-    public function setDetail($detail)
+    public function setDetail(?string $detail): static
     {
         $this->detail = $detail;
         return $this;
     }
-    
-    public function exception(Throwable $e, $debug = false)
+
+    public function exception(Throwable $e, bool $debug = false): static
     {
         $this
             ->setSuccess(false)
             ->setMessage($e->getMessage());
-        
+
         if ($debug) {
-            $detail = "{$e->getFile()}:{$e->getLine()}\n{$e->getTraceAsString()}";
-            $this->setDetail($detail);
+            $this->setDetail("{$e->getFile()}:{$e->getLine()}\n{$e->getTraceAsString()}");
         }
-        
+
         return $this;
     }
-        
-    public function jsonSerialize()
+
+    /** @return array<string,mixed> */
+    public function jsonSerialize(): array
     {
         $body = [
-            'success'        => $this->success,
-            'sessionStatus'  => $this->sessionStatus,
-            'time'           => time() * 1000,
+            'success' => $this->success,
+            'sessionStatus' => $this->sessionStatus,
+            'time' => time() * 1000,
         ];
-        
+
         if ($this->success) {
             $body['data'] = $this->data;
         } else {
@@ -139,7 +121,7 @@ class Envelope implements \JsonSerializable
                 $body['detail'] = $this->detail;
             }
         }
-        
+
         return $body;
     }
 }

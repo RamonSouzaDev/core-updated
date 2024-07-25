@@ -20,15 +20,15 @@ namespace Novosga\Module;
  */
 interface ModuleInterface
 {
-    public function getKeyName();
-    
-    public function getRoleName();
-    
-    public function getIconName();
+    public function getKeyName(): string;
 
-    public function getDisplayName();
+    public function getRoleName(): string;
 
-    public function getName();
+    public function getIconName(): string;
 
-    public function getHomeRoute();
+    public function getDisplayName(): string;
+
+    public function getName(): string;
+
+    public function getHomeRoute(): string;
 }

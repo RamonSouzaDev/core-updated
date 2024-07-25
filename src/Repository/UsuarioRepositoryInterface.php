@@ -33,9 +33,10 @@ interface UsuarioRepositoryInterface extends ObjectRepository, BaseRepository
      * @return UsuarioInterface[]
      */
     public function findByUnidade(UnidadeInterface $unidade, Criteria $criteria = null): array;
-    
+
     /**
      * Retorna os usuários que atendem o serviço da unidade
+     * @return UsuarioInterface[]
      */
     public function findByServicoUnidade(ServicoUnidadeInterface $servicoUnidade, Criteria $criteria = null): array;
 }

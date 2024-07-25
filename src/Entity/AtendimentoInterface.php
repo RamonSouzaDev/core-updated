@@ -85,7 +85,7 @@ interface AtendimentoInterface extends JsonSerializable
     public function getTempoAtendimento(): DateInterval;
 
     public function setTempoDeslocamento(DateInterval $tempoDeslocamento): static;
-    public function getTempoDeslocamento();
+    public function getTempoDeslocamento(): DateInterval;
 
     public function getCliente(): ?ClienteInterface;
     public function setCliente(ClienteInterface $cliente): static;
