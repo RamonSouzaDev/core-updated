@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Novosga\Infrastructure;
 
+use DateTimeInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Novosga\Entity\AgendamentoInterface;
 use Novosga\Entity\AtendimentoCodificadoInterface;
 use Novosga\Entity\AtendimentoInterface;
 use Novosga\Entity\UnidadeInterface;
+use Novosga\Entity\UsuarioInterface;
 
 /**
  * StorageInterface
@@ -50,13 +52,18 @@ interface StorageInterface
 
     /**
      * Move os dados de atendimento para o histórico
-     * @param array<string,mixed> $ctx
      */
-    public function acumularAtendimentos(?UnidadeInterface $unidade, array $ctx = []): void;
+    public function acumularAtendimentos(
+        UsuarioInterface $usuario,
+        ?UnidadeInterface $unidade,
+        DateTimeInterface $ateData,
+    ): void;
 
     /**
      * Apaga todos os dados de atendimentos
-     * @param array<string,mixed> $ctx
      */
-    public function apagarDadosAtendimento(?UnidadeInterface $unidade, array $ctx = []): void;
+    public function apagarDadosAtendimento(
+        UsuarioInterface $usuario,
+        ?UnidadeInterface $unidade,
+    ): void;
 }

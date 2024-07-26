@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Novosga\Entity;
 
-use DateTime;
 use DateInterval;
+use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 use JsonSerializable;
 
@@ -54,20 +54,20 @@ interface AtendimentoInterface extends JsonSerializable
     public function getNumeroLocal(): ?int;
     public function setNumeroLocal(?int $numeroLocal): static;
 
-    public function getDataAgendamento(): ?DateTime;
-    public function setDataAgendamento(?DateTime $dataAgendamento): static;
+    public function getDataAgendamento(): ?DateTimeInterface;
+    public function setDataAgendamento(?DateTimeInterface $dataAgendamento): static;
 
-    public function getDataChegada(): ?DateTime;
-    public function setDataChegada(?DateTime $dataChegada): static;
+    public function getDataChegada(): ?DateTimeInterface;
+    public function setDataChegada(?DateTimeInterface $dataChegada): static;
 
-    public function getDataChamada(): ?DateTime;
-    public function setDataChamada(?DateTime $dataChamada): static;
+    public function getDataChamada(): ?DateTimeInterface;
+    public function setDataChamada(?DateTimeInterface $dataChamada): static;
 
-    public function getDataInicio(): ?DateTime;
-    public function setDataInicio(?DateTime $dataInicio): static;
+    public function getDataInicio(): ?DateTimeInterface;
+    public function setDataInicio(?DateTimeInterface $dataInicio): static;
 
-    public function getDataFim(): ?DateTime;
-    public function setDataFim(?DateTime $dataFim): static;
+    public function getDataFim(): ?DateTimeInterface;
+    public function setDataFim(?DateTimeInterface $dataFim): static;
 
     public function getStatus(): ?string;
     public function setStatus(?string $status): static;
@@ -88,7 +88,7 @@ interface AtendimentoInterface extends JsonSerializable
     public function getTempoDeslocamento(): DateInterval;
 
     public function getCliente(): ?ClienteInterface;
-    public function setCliente(ClienteInterface $cliente): static;
+    public function setCliente(?ClienteInterface $cliente): static;
 
     public function getSenha(): SenhaInterface;
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Novosga\Service;
 
+use DateTimeInterface;
 use Exception;
 use Novosga\Entity\AgendamentoInterface;
 use Novosga\Entity\AtendimentoInterface;
@@ -87,7 +88,7 @@ interface AtendimentoServiceInterface
     /**
      * Adiciona uma nova senha na fila de chamada do painel de senhas.
      */
-    public function chamarSenha(UnidadeInterface $unidade, AtendimentoInterface $atendimento): void;
+    public function chamarSenha(AtendimentoInterface $atendimento, UsuarioInterface $usuario): void;
 
     /**
      * @param ServicoUsuarioInterface[] $servicos
@@ -111,8 +112,15 @@ interface AtendimentoServiceInterface
         int $numeroLocal
     ): bool;
 
-    /** @param array<string,mixed> $ctx */
-    public function acumularAtendimentos(?UnidadeInterface $unidade, array $ctx = []): void;
+    /**
+     * Move os registros da tabela atendimento para a tabela de historico de atendimentos.
+     * Se a unidade não for informada, será acumulado serviços de todas as unidades.
+     */
+    public function acumularAtendimentos(
+        UsuarioInterface $usuario,
+        ?UnidadeInterface $unidade,
+        DateTimeInterface $ateData,
+    ): void;
 
     /**
      * Retorna o atendimento em andamento do usuario informado.
@@ -130,35 +138,38 @@ interface AtendimentoServiceInterface
 
     /**
      * Redireciona um atendimento para outro serviço.
+     * @throws Exception
      */
     public function redirecionar(
         AtendimentoInterface $atendimento,
-        UnidadeInterface $unidade,
-        ServicoInterface|int $servico,
+        UsuarioInterface $usuario,
+        ServicoInterface|int $novoServico,
         UsuarioInterface|int $novoAtendente = null,
     ): AtendimentoInterface;
 
     /**
      * Transfere o atendimento para outro serviço e prioridade.
+     * @throws Exception
      */
     public function transferir(
         AtendimentoInterface $atendimento,
-        UnidadeInterface $unidade,
+        UsuarioInterface $usuario,
         ServicoInterface|int $novoServico,
         PrioridadeInterface|int $novaPrioridade
-    ): bool;
+    ): void;
 
     /**
      * Atualiza o status da senha para cancelado.
      * @throws Exception
      */
-    public function cancelar(AtendimentoInterface $atendimento): void;
+    public function cancelar(AtendimentoInterface $atendimento, UsuarioInterface $usuario): void;
 
     /**
      * Reativa o atendimento para o mesmo serviço e mesma prioridade.
      * Só pode reativar atendimentos que foram: Cancelados ou Não Compareceu.
+     * @throws Exception
      */
-    public function reativar(AtendimentoInterface $atendimento, UnidadeInterface $unidade): bool;
+    public function reativar(AtendimentoInterface $atendimento, UsuarioInterface $usuario): void;
 
     /**
      * @param ServicoInterface[]|int[] $servicosRealizados
@@ -166,7 +177,7 @@ interface AtendimentoServiceInterface
      */
     public function encerrar(
         AtendimentoInterface $atendimento,
-        UnidadeInterface $unidade,
+        UsuarioInterface $usuario,
         array $servicosRealizados,
         ServicoInterface|int $servicoRedirecionado = null,
         UsuarioInterface|int $novoUsuario = null,
@@ -175,5 +186,5 @@ interface AtendimentoServiceInterface
     /**
      * Apaga os dados de atendimento da unidade ou global
      */
-    public function limparDados(?UnidadeInterface $unidade): void;
+    public function limparDados(UsuarioInterface $usuario, ?UnidadeInterface $unidade): void;
 }

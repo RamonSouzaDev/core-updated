@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Novosga\Entity;
 
-use DateTime;
+use DateTimeInterface;
 use JsonSerializable;
 
 /**
@@ -38,8 +38,8 @@ interface ClienteInterface extends JsonSerializable
     public function getTelefone(): ?string;
     public function setTelefone(?string $telefone): static;
 
-    public function getDataNascimento(): ?DateTime;
-    public function setDataNascimento(?DateTime $dataNascimento): static;
+    public function getDataNascimento(): ?DateTimeInterface;
+    public function setDataNascimento(?DateTimeInterface $dataNascimento): static;
 
     public function getGenero(): ?string;
     public function setGenero(?string $genero): static;

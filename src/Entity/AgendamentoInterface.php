@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Novosga\Entity;
 
-use DateTime;
+use DateTimeInterface;
 use JsonSerializable;
 
 /**
@@ -31,11 +31,11 @@ interface AgendamentoInterface extends JsonSerializable
 
     public function setId(?int $id): static;
 
-    public function getData(): ?DateTime;
-    public function setData(?DateTime $data): static;
+    public function getData(): ?DateTimeInterface;
+    public function setData(?DateTimeInterface $data): static;
 
-    public function getHora(): ?DateTime;
-    public function setHora(?DateTime $hora): static;
+    public function getHora(): ?DateTimeInterface;
+    public function setHora(?DateTimeInterface $hora): static;
 
     public function getSituacao(): ?string;
     public function setSituacao(?string $situacao): static;
@@ -49,8 +49,8 @@ interface AgendamentoInterface extends JsonSerializable
     public function getServico(): ?ServicoInterface;
     public function setServico(?ServicoInterface $servico): static;
 
-    public function getDataConfirmacao(): ?DateTime;
-    public function setDataConfirmacao(?DateTime $dataConfirmacao): static;
+    public function getDataConfirmacao(): ?DateTimeInterface;
+    public function setDataConfirmacao(?DateTimeInterface $dataConfirmacao): static;
 
     public function getOid(): ?string;
     public function setOid(?string $oid): static;
