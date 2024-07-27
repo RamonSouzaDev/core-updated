@@ -27,7 +27,7 @@ final class QueueOrderingEvent extends Event
 {
     public function __construct(
         public readonly UnidadeInterface $unidade,
-        public readonly UsuarioInterface $usuario,
+        public readonly ?UsuarioInterface $usuario,
         public readonly QueryBuilder $queryBuilder,
     ) {
     }

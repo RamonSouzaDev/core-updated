@@ -117,7 +117,7 @@ interface AtendimentoServiceInterface
      * Se a unidade não for informada, será acumulado serviços de todas as unidades.
      */
     public function acumularAtendimentos(
-        UsuarioInterface $usuario,
+        ?UsuarioInterface $usuario,
         ?UnidadeInterface $unidade,
         DateTimeInterface $ateData,
     ): void;
@@ -186,5 +186,5 @@ interface AtendimentoServiceInterface
     /**
      * Apaga os dados de atendimento da unidade ou global
      */
-    public function limparDados(UsuarioInterface $usuario, ?UnidadeInterface $unidade): void;
+    public function limparDados(?UsuarioInterface $usuario, ?UnidadeInterface $unidade): void;
 }
