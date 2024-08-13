@@ -204,11 +204,10 @@ class AtendimentoService extends StorageAwareService
             ($this->publisher)(new Update([
                 "/unidades/{$unidade->getId()}/fila",
             ], json_encode([ 'id' => $unidade->getId() ])));
-        } else {
-            ($this->publisher)(new Update([
-                "/fila",
-            ], json_encode([  ])));
         }
+        ($this->publisher)(new Update([
+            "/fila",
+        ], json_encode([])));
     }
 
     public function buscaAtendimento(Unidade $unidade, $id)
@@ -1002,13 +1001,18 @@ class AtendimentoService extends StorageAwareService
      * Apaga os dados de atendimento da unidade ou global
      * @param Unidade $unidade
      */
-    public function limparDados(Unidade $unidade)
+    public function limparDados(?Unidade $unidade)
     {
         $this->storage->apagarDadosAtendimento($unidade);
 
+        if ($unidade) {
+            ($this->publisher)(new Update([
+                "/unidades/{$unidade->getId()}/fila",
+            ], json_encode([ 'id' => $unidade->getId() ])));
+        }
         ($this->publisher)(new Update([
-            "/unidades/{$unidade->getId()}/fila",
-        ], json_encode([ 'id' => $unidade->getId() ])));
+            "/fila",
+        ], json_encode([])));
     }
     
     /**
