@@ -171,4 +171,38 @@ class Unidade implements \JsonSerializable
             'deletedAt' => $this->getDeletedAt() ? $this->getDeletedAt()->format('Y-m-d\TH:i:s') : null,
         ];
     }
+
+    /**
+     * @ORM\Column(name="automatic_call_enabled", type="boolean", options={"default" : false})
+     */
+    private $automaticCallEnabled = false;
+
+    /**
+     * @ORM\Column(name="automatic_call_interval", type="integer", options={"default" : 0})
+     */
+    private $automaticCallInterval = 0;
+
+    // ... métodos existentes ...
+
+    public function isAutomaticCallEnabled(): bool
+    {
+        return $this->automaticCallEnabled;
+    }
+
+    public function setAutomaticCallEnabled(bool $automaticCallEnabled): self
+    {
+        $this->automaticCallEnabled = $automaticCallEnabled;
+        return $this;
+    }
+
+    public function getAutomaticCallInterval(): int
+    {
+        return $this->automaticCallInterval;
+    }
+
+    public function setAutomaticCallInterval(int $automaticCallInterval): self
+    {
+        $this->automaticCallInterval = $automaticCallInterval;
+        return $this;
+    }
 }
